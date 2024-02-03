@@ -1,7 +1,5 @@
 #include <cstdio>
 #include <cstring>
-#include <cstdlib>
-#include <cmath>
 
 int bin_to_dec(char bin[]) {
 	int num = 0;
@@ -24,22 +22,20 @@ int bin_to_dec2(int binary) {
 	return decimal;
 }
 
-int bin_to_dec_rec(char bin[], unsigned int i = 0) {
-	int dec = 0;
-	if (i < strlen(bin)) {
-		if(bin[i]  == '1') dec = pow(2, i);
-
-		return dec + bin_to_dec_rec(bin, ++i);
+int bin_to_dec_rec(char bin[], int i = 0) {
+	int size = strlen(bin);
+	if (i == size - 1) {
+		return bin[i] - '0';
 	}
 	
-	return dec;
+	return ((bin[i] - '0') << (size - i - 1)) + bin_to_dec_rec(bin, i + 1);
 }
 	
 	
 
 int main() {
-	char bin[] = "1011";
-	int bin2 = 1011;	
+	char bin[] = "10010011";
+
 	printf("%d\n", bin_to_dec_rec(bin));
 	
 	return 0;
